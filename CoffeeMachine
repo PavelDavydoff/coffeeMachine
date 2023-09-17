@@ -1,0 +1,142 @@
+import java.util.*
+
+class CoffeeMachine {
+    
+    var water: Int = 0
+    var milk: Int = 0
+    var beans: Int = 0
+    
+    private var scanner = Scanner(System.`in`)
+    
+    var coffeeName = ""
+    
+    fun makeEspresso(){
+        if (water < 60) {
+            println("Недостаточно воды!")
+            return
+        }
+        if (beans < 10){
+            println("Недостаточно кофе!")
+            return
+        }
+        water-=60
+        beans-=10
+        println("$coffeeName готов")
+        return
+    }
+    
+    fun makeAmericano(){
+        if (water < 120) {
+            println("Недостаточно воды!")
+            return
+        }
+        if (beans < 10){
+            println("Недостаточно кофе!")
+            return
+        }
+        water-=120
+        beans-=10
+        println("$coffeeName готов")
+        return
+    }
+    
+    fun makeCapuccino(){
+        if (water < 120) {
+            println("Недостаточно воды!")
+            return
+        }
+        if (beans < 20){
+            println("Недостаточно кофе!")
+            return
+        }
+        if (milk < 60){
+            println("Недостаточно молока")
+        }
+        water-=120
+        beans-=20
+        milk-=60
+        println("$coffeeName готов")
+        return
+    }
+    
+    fun makeLatte(){
+         if (water < 240) {
+            println("Недостаточно воды!")
+            return
+        }
+        if (beans < 20){
+            println("Недостаточно кофе!")
+            return
+        }
+        if (milk < 120){
+            println("Недостаточно молока")
+        }
+        water-=240
+        beans-=20
+        milk-=120
+        println("$coffeeName готов")
+        return
+    }
+    
+    fun selectCoffee(){
+        
+        while(true){
+        println( "Введите название напитка или \"назад\" для возврата в главное меню")
+        coffeeName = (scanner.next()).lowercase()
+            when (coffeeName){
+                "назад" -> {return}
+                "эспрессо" -> {
+                    makeEspresso()
+                    }
+                "американо" ->{
+                    makeAmericano()
+                }
+                "капучино" -> {
+                    makeCapuccino()
+                }
+                "латте" -> {
+                    makeLatte()
+                }
+                else -> {
+                    println("Рецепт не найден!")
+                }
+                }
+        }
+    }
+    
+    fun setCommand(){
+        while(true){
+            println("Введите команду")
+            var i = (scanner.next()).lowercase()
+            when(i){
+                "выключить" -> {
+                    println("До свидания!")
+                    return
+                }
+                "наполнить" ->{
+                    water = 2000
+                    milk = 1000
+                    beans = 500
+                    println("Ингридиенты пополнены")
+                }
+                "статус" -> {
+                    println("Ингридиентов осталось:")
+                    println("$water мл воды\n$milk мл молока\n$beans гр кофе")
+                }
+                "кофе" -> {
+                    selectCoffee()                  
+                }
+            }
+        }  
+    }
+    
+    fun start(){
+        println("Кофемашина готова к работе")
+        setCommand()
+        
+    }
+    // Начните написание программы с публичной функции start().
+    // В этот раз мы не даём вам конкретных указаний, как должна быть написана программа.
+    // У вас есть полная свобода действией, главное, что бы программа соответствовала ТЗ.
+    // Удачи!
+}
